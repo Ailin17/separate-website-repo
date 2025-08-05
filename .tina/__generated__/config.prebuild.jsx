@@ -1,14 +1,16 @@
+// .tina/config.js
 import { defineConfig } from "tinacms";
-
-export const config = defineConfig({
+var config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   token: process.env.TINA_TOKEN,
   branch: "master",
   // Relative to the _root_ of your repo
   localContentPath: "../../demo-content-repo",
   build: {
-    publicFolder: "public", // The public asset folder for your framework
-    outputFolder: "admin", // within the public folder
+    publicFolder: "public",
+    // The public asset folder for your framework
+    outputFolder: "admin"
+    // within the public folder
   },
   schema: {
     collections: [
@@ -22,17 +24,17 @@ export const config = defineConfig({
             name: "body",
             label: "Main Content",
             type: "rich-text",
-            isBody: true,
-          },
+            isBody: true
+          }
         ],
         ui: {
           router: ({ document }) => {
             if (document._sys.filename === "home") {
               return `/`;
             }
-            return undefined;
-          },
-        },
+            return void 0;
+          }
+        }
       },
       {
         label: "Blog Posts",
@@ -42,7 +44,7 @@ export const config = defineConfig({
           {
             type: "string",
             label: "Title",
-            name: "title",
+            name: "title"
           },
           {
             type: "string",
@@ -50,18 +52,21 @@ export const config = defineConfig({
             name: "body",
             isBody: true,
             ui: {
-              component: "textarea",
-            },
-          },
+              component: "textarea"
+            }
+          }
         ],
         ui: {
           router: ({ document }) => {
             return `/posts/${document._sys.filename}`;
-          },
-        },
-      },
-    ],
-  },
+          }
+        }
+      }
+    ]
+  }
 });
-
-export default config;
+var config_default = config;
+export {
+  config,
+  config_default as default
+};
